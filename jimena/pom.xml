@@ -14,6 +14,13 @@
 	</modules>
 
 	<dependencies>
+		<!-- guava https://code.google.com/p/guava-libraries/ -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>r09</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -24,7 +31,7 @@
 
 	<build>
 		<pluginManagement>
-			<plugins>				
+			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>

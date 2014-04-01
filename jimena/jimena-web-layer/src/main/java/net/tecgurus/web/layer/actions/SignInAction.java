@@ -15,6 +15,8 @@ import com.opensymphony.xwork2.ModelDriven;
 public class SignInAction 
 	extends ActionSupport
 	implements ModelDriven<SignInModel>{
+	public static final String SIGN_IN = "signIn";
+
 	private static final String SIGN_IN_JSP = "/WEB-INF/jsp/user/signIn.jsp";
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +27,7 @@ public class SignInAction
 		_signInModel = new SignInModel();
 	}
 	
-	@Action(value = "signIn", results = {
+	@Action(value = SIGN_IN, results = {
 			@Result(location = SIGN_IN_JSP)
 	})
 	public String getSignIn(){
