@@ -5,18 +5,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SignUp</title>
+<title> <s:text name="title" /> </title>
 </head>
 <body>
-	<h3>SignUp</h3>
-
+	<h3> <s:text name="title" /> </h3>
+	
 	<s:form action="processSignUp">
-		<s:textfield name="userName" label="Nombre" />
-		<s:textfield name="userEmail" label="Email" />
-		<s:password name="userPassword" label="Password"/>
-		<s:password name="userConfirmPass" label="Confirm Pass"/>
+		<s:textfield name="userName" label="%{getText('userName')}" />
+		<s:textfield name="userEmail" label="%{getText('userEmail')}" />
+		<s:password name="userPassword" label="%{getText('userPassword')}"/>
+		<s:password name="userConfirmPass" label="%{getText('userConfirmPass')}"/>
 		
-		<s:submit value="Aceptar" />
+		<s:submit value="%{getText('ok')}" />
 	</s:form>
 </body>
 </html>

@@ -1,12 +1,16 @@
 package net.tecgurus.business.layer;
 
-import net.tecgurus.data.layer.UserResporitoryInMemoryImpl;
+import net.tecgurus.data.layer.UserRepositoryInMemoryImpl;
 
 import com.google.common.base.Strings;
 
 public class SignUpProcessor {
 	
-	private UserResporitoryInMemoryImpl _userRepository;
+	private UserRepositoryInMemoryImpl _userRepository;
+	
+	public SignUpProcessor() {
+		_userRepository = new UserRepositoryInMemoryImpl();
+	}
 	
 	public boolean perform(
 			String userName,
@@ -23,6 +27,10 @@ public class SignUpProcessor {
 		}
 		
 		if(!userPassword.equals(userConfirmPass)){
+			return false;
+		}
+		
+		if(_userRepository.isEmailRegistered(userEmail)){
 			return false;
 		}
 		

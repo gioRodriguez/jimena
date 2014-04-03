@@ -16,6 +16,8 @@ import com.opensymphony.xwork2.ModelDriven;
 public class SignUpAction 
 	extends ActionSupport 
 	implements ModelDriven<SignUpModel> {
+	public static final String SIGN_UP = "signUp";
+
 	private static final String REDIRECT_TO_SIGN_IN = "redirectToSignIn";
 
 	private static final String SIGN_UP_JSP = "/WEB-INF/jsp/user/signUp.jsp";
@@ -31,7 +33,7 @@ public class SignUpAction
 		_signUpProcessor = new SignUpProcessor();
 	}
 
-	@Action(value = "signUp", results = { 
+	@Action(value = SIGN_UP, results = { 
 			@Result(location = SIGN_UP_JSP) })
 	public String getSignUp() {
 		return SUCCESS;
@@ -66,7 +68,9 @@ public class SignUpAction
 	}
 	
 	
-	
+	public int getId(){
+		return 3;
+	}
 	
 	
 	

@@ -1,3 +1,5 @@
-/.settings/
-/.metadata/
-/RemoteSystemsTempFiles/
+.settings
+.metadata
+.classpath
+.project
+RemoteSystemsTempFiles
