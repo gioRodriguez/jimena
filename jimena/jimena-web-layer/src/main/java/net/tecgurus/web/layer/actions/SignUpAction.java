@@ -18,19 +18,21 @@ public class SignUpAction
 	implements ModelDriven<SignUpModel> {
 	public static final String SIGN_UP = "signUp";
 
-	private static final String REDIRECT_TO_SIGN_IN = "redirectToSignIn";
+	public static final String REDIRECT_TO_SIGN_IN = "redirectToSignIn";
 
 	private static final String SIGN_UP_JSP = "/WEB-INF/jsp/user/signUp.jsp";
 
 	private static final long serialVersionUID = 1L;
 	
-	private SignUpModel _signUpModel;
-	private SignUpProcessor _signUpProcessor;
+	private final SignUpModel _signUpModel;
+	private final SignUpProcessor _signUpProcessor;
 	
-	public SignUpAction() {
-		_signUpModel = new SignUpModel();
+	public SignUpAction(
+			SignUpProcessor signUpProcessor
+	) {
+		_signUpModel = new SignUpModel();		
 		
-		_signUpProcessor = new SignUpProcessor();
+		_signUpProcessor = signUpProcessor;
 	}
 
 	@Action(value = SIGN_UP, results = { 
@@ -49,7 +51,7 @@ public class SignUpAction
 	})
 	public String processSignUp(){
 		boolean userRegistered = _signUpProcessor.perform(
-				_signUpModel.getUserName(), 
+				_signUpModel.getUserName(),
 				_signUpModel.getUserEmail(), 
 				_signUpModel.getUserPassword(), 
 				_signUpModel.getUserConfirmPass()
@@ -66,12 +68,4 @@ public class SignUpAction
 	public SignUpModel getModel() {
 		return _signUpModel;
 	}
-	
-	
-	public int getId(){
-		return 3;
-	}
-	
-	
-	
 }

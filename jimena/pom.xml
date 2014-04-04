@@ -12,6 +12,10 @@
 		<module>jimena-business-layer</module>
 		<module>jimena-data-layer</module>
 	</modules>
+	
+	<properties>
+		<spring.version>4.0.3.RELEASE</spring.version>
+	</properties>
 
 	<dependencies>
 		<!-- guava https://code.google.com/p/guava-libraries/ -->

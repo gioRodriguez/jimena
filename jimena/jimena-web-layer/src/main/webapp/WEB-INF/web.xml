@@ -11,6 +11,10 @@
       org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
     </filter-class>
   </filter>
+  
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 
   <filter-mapping>
     <filter-name>struts2</filter-name>

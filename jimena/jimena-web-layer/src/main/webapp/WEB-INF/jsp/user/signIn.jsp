@@ -5,15 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SignIn</title>
+<title><s:text name="title" /></title>
 </head>
 <body>
-	<h3>SignIn</h3>
+	<h3>
+		<s:text name="title" />
+	</h3>
 	<s:form action="processSignIn">
-		<s:textfield name="userEmail" label="Email" />
-		<s:password name="userPassword" label="Password" />
-		
-		<s:submit value="Aceptar"/>
+		<s:textfield name="userEmail" label="%{getText('userEmail')}" />
+		<s:password name="userPassword" label="%{getText('userPassword')}" />
+
+		<s:submit value="%{getText('ok')}" />
 	</s:form>
 </body>
 </html>

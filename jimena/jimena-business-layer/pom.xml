@@ -11,6 +11,12 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>net.tecgurus</groupId>
 			<artifactId>jimena-data-layer</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
