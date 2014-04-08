@@ -1,7 +1,6 @@
 package net.tecgurus.web.layer.actions;
 
 import net.tecgurus.business.layer.SignInProcessor;
-import net.tecgurus.business.layer.SignInProcessorImpl;
 import net.tecgurus.web.layer.models.SignInModel;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -25,14 +24,15 @@ public class SignInAction
 
 	private static final long serialVersionUID = 1L;
 	
-	private final SignInModel _signInModel;
-	
+	private final SignInModel _signInModel;	
 	private final SignInProcessor _signInProcessor;
 
-	public SignInAction() {
+	public SignInAction(
+			SignInProcessor signInProcessor
+	) {
 		_signInModel = new SignInModel();
 		
-		_signInProcessor = new SignInProcessorImpl();
+		_signInProcessor = signInProcessor;
 	}
 	
 	@Action(value = SIGN_IN, results = {

@@ -1,15 +1,24 @@
 package net.tecgurus.business.layer;
 
+import net.tecgurus.data.layer.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.google.common.base.Strings;
 
-import net.tecgurus.data.layer.UserRepository;
-import net.tecgurus.data.layer.UserRepositoryInMemoryImpl;
-
+@Component
+@Scope("prototype")
 public class SignInProcessorImpl implements SignInProcessor {
+	
 	private final UserRepository _userRepository;
 	
-	public SignInProcessorImpl() {
-		_userRepository = new UserRepositoryInMemoryImpl();
+	@Autowired
+	public SignInProcessorImpl(
+			UserRepository userRepository
+	) {
+		_userRepository = userRepository;
 	}
 	
 	@Override

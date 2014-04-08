@@ -10,7 +10,7 @@
 <body>
 	<h3> <s:text name="title" /> </h3>
 	
-	<s:form action="processSignUp">
+	<s:form action="processSignUp" validate="true">
 		<s:textfield name="userName" label="%{getText('userName')}" />
 		<s:textfield name="userEmail" label="%{getText('userEmail')}" />
 		<s:password name="userPassword" label="%{getText('userPassword')}"/>

@@ -1,10 +1,10 @@
 package net.tecgurus.business.layer;
 
+import net.tecgurus.data.layer.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import net.tecgurus.data.layer.UserRepository;
-import net.tecgurus.data.layer.UserRepositoryInMemoryImpl;
 
 import com.google.common.base.Strings;
 
@@ -14,8 +14,11 @@ public class SignUpProcessorImpl implements SignUpProcessor {
 	
 	private UserRepository _userRepository;
 	
-	public SignUpProcessorImpl() {
-		_userRepository = new UserRepositoryInMemoryImpl();
+	@Autowired
+	public SignUpProcessorImpl(
+			UserRepository userRepository
+	) {
+		_userRepository = userRepository;
 	}
 	
 	@Override

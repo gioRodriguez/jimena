@@ -3,6 +3,9 @@ package net.tecgurus.data.layer;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class UserRepositoryInMemoryImpl implements UserRepository {
 	
 	private static final Map<String, String> USERS = 

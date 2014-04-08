@@ -36,7 +36,8 @@ public class SignUpAction
 	}
 
 	@Action(value = SIGN_UP, results = { 
-			@Result(location = SIGN_UP_JSP) })
+			@Result(location = SIGN_UP_JSP)
+	})
 	public String getSignUp() {
 		return SUCCESS;
 	}
@@ -47,7 +48,8 @@ public class SignUpAction
 					name= REDIRECT_TO_SIGN_IN, 
 					type= "redirect", 
 					location= SignInAction.SIGN_IN
-			)
+			),
+			@Result(name = INPUT, location = SIGN_UP_JSP)
 	})
 	public String processSignUp(){
 		boolean userRegistered = _signUpProcessor.perform(
@@ -59,6 +61,8 @@ public class SignUpAction
 		
 		if(userRegistered){
 			return REDIRECT_TO_SIGN_IN;
+		} else {
+			addFieldError("userEmail", "email already registered");
 		}
 				
 		return SUCCESS;
