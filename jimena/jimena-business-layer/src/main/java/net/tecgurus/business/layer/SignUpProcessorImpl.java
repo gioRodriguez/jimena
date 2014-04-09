@@ -1,5 +1,8 @@
 package net.tecgurus.business.layer;
 
+import net.tecgurus.business.layer.exceptions.BusinessException;
+import net.tecgurus.business.layer.exceptions.ConfirmPassNotMatchException;
+import net.tecgurus.business.layer.exceptions.EmailAlreadyRegisteredException;
 import net.tecgurus.data.layer.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,34 +25,35 @@ public class SignUpProcessorImpl implements SignUpProcessor {
 	}
 	
 	@Override
-	public boolean perform(
+	public int perform(
 			String userName,
 			String userEmail,
 			String userPassword,
 			String userConfirmPass
-	){
+	) 
+	throws 
+		BusinessException
+	{
 		if(Strings.isNullOrEmpty(userName) ||
 				Strings.isNullOrEmpty(userEmail) ||
 				Strings.isNullOrEmpty(userPassword) ||
 				Strings.isNullOrEmpty(userConfirmPass)
 		){			
-			return false;
+			throw new BusinessException("data invalid");
 		}
 		
 		if(!userPassword.equals(userConfirmPass)){
-			return false;
+			throw new ConfirmPassNotMatchException();
 		}
 		
 		if(_userRepository.isEmailRegistered(userEmail)){
-			return false;
+			throw new EmailAlreadyRegisteredException();
 		}
 		
-		_userRepository.registerUser(
+		return _userRepository.registerUser(
 				userName, 
 				userEmail, 
 				userPassword
 		);
-		
-		return true;
 	}
 }

@@ -5,13 +5,13 @@ import net.tecgurus.business.layer.SignUpProcessor;
 public class MockSignUpProcessor implements SignUpProcessor {
 
 	@Override
-	public boolean perform(String userName, String userEmail,
+	public int perform(String userName, String userEmail,
 			String userPassword, String userConfirmPass) {
 		if(userName != null){
-			return false;
+			return 1;
 		}
 		
-		return true;
+		return 0;
 	}
 
 }

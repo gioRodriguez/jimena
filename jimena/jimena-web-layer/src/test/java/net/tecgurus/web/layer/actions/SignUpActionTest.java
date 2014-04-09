@@ -2,6 +2,9 @@ package net.tecgurus.web.layer.actions;
 
 import static org.junit.Assert.assertEquals;
 import net.tecgurus.business.layer.SignUpProcessor;
+import net.tecgurus.business.layer.exceptions.BusinessException;
+import net.tecgurus.business.layer.exceptions.ConfirmPassNotMatchException;
+import net.tecgurus.business.layer.exceptions.EmailAlreadyRegisteredException;
 
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -25,7 +28,8 @@ public class SignUpActionTest {
 	}
 	
 	@Test
-	public void processSignUpWhitRegisterFailTest() {
+	public void processSignUpWhitRegisterFailTest() 
+			throws BusinessException {
 		// arrange
 		String expected = SignUpAction.SUCCESS;
 		
@@ -39,7 +43,7 @@ public class SignUpActionTest {
 				userEmailCaptor.capture(), 
 				userPasswordCaptor.capture(), 
 				userConfirmPassCaptor.capture()))
-				.thenReturn(false);
+				.thenReturn(1);
 		
 		SignUpAction signUpAction = new SignUpAction(signUpProcessor);
 		

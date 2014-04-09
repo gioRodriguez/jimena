@@ -47,7 +47,8 @@ public class SignInAction
 			@Result(
 					name = REDIRECT_TO_SIGN_UP, 
 					type = "redirect", 
-					location = SignUpAction.SIGN_UP)
+					location = SignUpAction.SIGN_UP),
+			@Result( name = INPUT, location = SIGN_IN_JSP)
 	})
 	public String processSignIn(){
 		boolean isValidUser = _signInProcessor.perform(
