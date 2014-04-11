@@ -3,6 +3,7 @@ package net.tecgurus.business.layer;
 import net.tecgurus.data.layer.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ public class SignInProcessorImpl implements SignInProcessor {
 	
 	@Autowired
 	public SignInProcessorImpl(
-			UserRepository userRepository
+			@Qualifier(UserRepository.HIBERNATE_IMPL) UserRepository userRepository
 	) {
 		_userRepository = userRepository;
 	}

@@ -6,6 +6,7 @@ import net.tecgurus.business.layer.exceptions.EmailAlreadyRegisteredException;
 import net.tecgurus.data.layer.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class SignUpProcessorImpl implements SignUpProcessor {
 	
 	@Autowired
 	public SignUpProcessorImpl(
-			UserRepository userRepository
+			@Qualifier(UserRepository.HIBERNATE_IMPL) UserRepository userRepository
 	) {
 		_userRepository = userRepository;
 	}

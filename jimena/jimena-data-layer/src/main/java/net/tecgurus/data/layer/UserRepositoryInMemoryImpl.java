@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository(UserRepository.MEMORY_IMPL)
 public class UserRepositoryInMemoryImpl implements UserRepository {
 	
 	private static final Map<String, String> USERS = 
