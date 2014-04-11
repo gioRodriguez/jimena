@@ -17,7 +17,7 @@ public class SignInProcessorImpl implements SignInProcessor {
 	
 	@Autowired
 	public SignInProcessorImpl(
-			@Qualifier(UserRepository.HIBERNATE_IMPL) UserRepository userRepository
+			@Qualifier(UserRepository.IMPL) UserRepository userRepository
 	) {
 		_userRepository = userRepository;
 	}

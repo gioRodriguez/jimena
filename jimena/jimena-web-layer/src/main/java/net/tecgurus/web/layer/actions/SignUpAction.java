@@ -4,6 +4,7 @@ import net.tecgurus.business.layer.SignUpProcessor;
 import net.tecgurus.business.layer.exceptions.BusinessException;
 import net.tecgurus.business.layer.exceptions.ConfirmPassNotMatchException;
 import net.tecgurus.business.layer.exceptions.EmailAlreadyRegisteredException;
+import net.tecgurus.data.layer.exceptions.ServiceUnavailableException;
 import net.tecgurus.web.layer.models.SignUpModel;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -29,7 +30,7 @@ public class SignUpAction
 
 	private static final long serialVersionUID = 1L;
 	
-	private int _userId;
+	private long _userId;
 	
 	private final SignUpModel _signUpModel;
 	private final SignUpProcessor _signUpProcessor;
@@ -61,7 +62,7 @@ public class SignUpAction
 			),
 			@Result(name = INPUT, location = SIGN_UP_JSP)
 	})
-	public String processSignUp(){
+	public String processSignUp() throws ServiceUnavailableException{
 		try {
 			_userId = _signUpProcessor.perform(
 					_signUpModel.getUserName(),
@@ -85,7 +86,7 @@ public class SignUpAction
 		return _signUpModel;
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 

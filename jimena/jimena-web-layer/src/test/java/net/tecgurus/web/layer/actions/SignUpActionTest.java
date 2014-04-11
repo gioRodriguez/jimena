@@ -5,6 +5,7 @@ import net.tecgurus.business.layer.SignUpProcessor;
 import net.tecgurus.business.layer.exceptions.BusinessException;
 import net.tecgurus.business.layer.exceptions.ConfirmPassNotMatchException;
 import net.tecgurus.business.layer.exceptions.EmailAlreadyRegisteredException;
+import net.tecgurus.data.layer.exceptions.ServiceUnavailableException;
 
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -13,7 +14,7 @@ import org.mockito.Mockito;
 public class SignUpActionTest {
 
 	@Test
-	public void processSignUpTest() {
+	public void processSignUpTest() throws ServiceUnavailableException {
 		// arrange
 		String expected = SignUpAction.REDIRECT_TO_SIGN_IN;
 		
@@ -29,7 +30,7 @@ public class SignUpActionTest {
 	
 	@Test
 	public void processSignUpWhitRegisterFailTest() 
-			throws BusinessException {
+			throws BusinessException, ServiceUnavailableException {
 		// arrange
 		String expected = SignUpAction.SUCCESS;
 		
@@ -43,7 +44,7 @@ public class SignUpActionTest {
 				userEmailCaptor.capture(), 
 				userPasswordCaptor.capture(), 
 				userConfirmPassCaptor.capture()))
-				.thenReturn(1);
+				.thenReturn(1L);
 		
 		SignUpAction signUpAction = new SignUpAction(signUpProcessor);
 		

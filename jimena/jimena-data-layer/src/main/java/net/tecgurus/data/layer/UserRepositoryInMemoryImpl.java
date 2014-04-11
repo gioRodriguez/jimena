@@ -3,6 +3,8 @@ package net.tecgurus.data.layer;
 import java.util.Hashtable;
 import java.util.Map;
 
+import net.tecgurus.data.layer.exceptions.ServiceUnavailableException;
+
 import org.springframework.stereotype.Repository;
 
 @Repository(UserRepository.MEMORY_IMPL)
@@ -27,11 +29,11 @@ public class UserRepositoryInMemoryImpl implements UserRepository {
 	}
 	
 	@Override
-	public int registerUser(
+	public long registerUser(
 			String userName,
 			String userEmail,
 			String userPassword
-			){
+			) throws ServiceUnavailableException{
 		USERS.put(userEmail, userName);
 		return 1;
 	}	

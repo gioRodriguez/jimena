@@ -1,14 +1,17 @@
 package net.tecgurus.business.layer;
 
+
 import net.tecgurus.business.layer.exceptions.BusinessException;
 import net.tecgurus.business.layer.exceptions.ConfirmPassNotMatchException;
 import net.tecgurus.business.layer.exceptions.EmailAlreadyRegisteredException;
 import net.tecgurus.data.layer.UserRepository;
+import net.tecgurus.data.layer.exceptions.ServiceUnavailableException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Strings;
 
@@ -20,20 +23,21 @@ public class SignUpProcessorImpl implements SignUpProcessor {
 	
 	@Autowired
 	public SignUpProcessorImpl(
-			@Qualifier(UserRepository.HIBERNATE_IMPL) UserRepository userRepository
+			@Qualifier(UserRepository.IMPL) UserRepository userRepository
 	) {
 		_userRepository = userRepository;
 	}
 	
 	@Override
-	public int perform(
+	@Transactional(rollbackFor = Exception.class)
+	public long perform(
 			String userName,
 			String userEmail,
 			String userPassword,
 			String userConfirmPass
 	) 
 	throws 
-		BusinessException
+		BusinessException, ServiceUnavailableException
 	{
 		if(Strings.isNullOrEmpty(userName) ||
 				Strings.isNullOrEmpty(userEmail) ||
