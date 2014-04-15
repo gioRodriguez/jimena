@@ -1,9 +1,14 @@
 package net.tecgurus.data.layer;
 
+import java.util.List;
+
 import net.tecgurus.data.layer.exceptions.ServiceUnavailableException;
 import net.tecgurus.data.layer.model.User;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,15 +23,40 @@ public class UserRepositoryHibernateImpl implements UserRepository {
 	}
 	
 	@Override
-	public boolean isValidUser(String userEmail, String userPassword) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isValidUser(String userEmail, String userPassword) 
+			throws ServiceUnavailableException {
+		try{
+			Criteria criteria = _sessionFactory
+					.getCurrentSession()
+					.createCriteria(User.class);
+			
+			criteria.add(Restrictions.eq("email", userEmail));
+			criteria.add(Restrictions.eq("password", userPassword));
+			
+			List<User> result = criteria.list();
+			return result.size() > 0;
+		} catch(Exception e) {
+			//TODO: log the error message
+			throw new ServiceUnavailableException(e.getMessage(), e);
+		}
 	}
 
 	@Override
-	public boolean isEmailRegistered(String userEmail) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isEmailRegistered(String userEmail) 
+			throws ServiceUnavailableException {
+		try{
+			Criteria criteria = _sessionFactory
+					.getCurrentSession()
+					.createCriteria(User.class);
+			
+			criteria.add(Restrictions.eq("email", userEmail));			
+			
+			List<User> result = criteria.list();
+			return result.size() > 0;
+		} catch(Exception e){
+			//TODO: log the error message
+			throw new ServiceUnavailableException(e.getMessage(), e);
+		}
 	}
 
 	@Override

@@ -9,9 +9,10 @@ public interface UserRepository {
 	
 	public static final String IMPL = HIBERNATE_IMPL;
 	
-	public boolean isValidUser(String userEmail, String userPassword);
+	public boolean isValidUser(String userEmail, String userPassword) 
+			throws ServiceUnavailableException;
 
-	public boolean isEmailRegistered(String userEmail);
+	public boolean isEmailRegistered(String userEmail) throws ServiceUnavailableException;
 
 	public long registerUser(String userName, String userEmail, String userPassword) throws ServiceUnavailableException;
 

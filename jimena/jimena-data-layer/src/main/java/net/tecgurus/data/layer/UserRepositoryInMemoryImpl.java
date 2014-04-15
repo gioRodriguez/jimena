@@ -17,14 +17,14 @@ public class UserRepositoryInMemoryImpl implements UserRepository {
 	public boolean isValidUser(
 			String userEmail, 
 			String userPassword
-	){
+	)throws ServiceUnavailableException{
 		return USERS.containsKey(userEmail);
 	}
 	
 	@Override
 	public boolean isEmailRegistered(
 			String userEmail
-	){
+	)throws ServiceUnavailableException{
 		return USERS.containsKey(userEmail);
 	}
 	

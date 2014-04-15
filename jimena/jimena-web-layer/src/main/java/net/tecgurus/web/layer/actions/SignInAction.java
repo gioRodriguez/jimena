@@ -1,6 +1,7 @@
 package net.tecgurus.web.layer.actions;
 
 import net.tecgurus.business.layer.SignInProcessor;
+import net.tecgurus.data.layer.exceptions.ServiceUnavailableException;
 import net.tecgurus.web.layer.models.SignInModel;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -50,7 +51,7 @@ public class SignInAction
 					location = SignUpAction.SIGN_UP),
 			@Result( name = INPUT, location = SIGN_IN_JSP)
 	})
-	public String processSignIn(){
+	public String processSignIn() throws ServiceUnavailableException{
 		boolean isValidUser = _signInProcessor.perform(
 				_signInModel.getUserEmail(), 
 				_signInModel.getUserPassword()
