@@ -14,13 +14,18 @@
 	<name>jimena-web-layer</name>
 
 	<properties>
-		<struts2.version>2.3.16.1</struts2.version>		
+		<struts2.version>2.3.16.1</struts2.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
 		<!-- struts2 -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-json-plugin</artifactId>
+			<version>${struts2.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
