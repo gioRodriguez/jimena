@@ -1,10 +1,14 @@
 package net.tecgurus.web.layer.actions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.tecgurus.business.layer.SignUpProcessor;
 import net.tecgurus.business.layer.exceptions.BusinessException;
 import net.tecgurus.business.layer.exceptions.ConfirmPassNotMatchException;
 import net.tecgurus.business.layer.exceptions.EmailAlreadyRegisteredException;
 import net.tecgurus.data.layer.exceptions.ServiceUnavailableException;
+import net.tecgurus.web.layer.models.CountryModel;
 import net.tecgurus.web.layer.models.SignUpModel;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -35,10 +39,13 @@ public class SignUpAction
 	private final SignUpModel _signUpModel;
 	private final SignUpProcessor _signUpProcessor;
 	
+	private final List<CountryModel> _countries;
+	
 	public SignUpAction(
 			SignUpProcessor signUpProcessor
 	) {
-		_signUpModel = new SignUpModel();		
+		_signUpModel = new SignUpModel();	
+		_countries = new ArrayList<CountryModel>();
 		
 		_signUpProcessor = signUpProcessor;
 	}
@@ -84,13 +91,17 @@ public class SignUpAction
 	@Override
 	public SignUpModel getModel() {
 		return _signUpModel;
-	}
-
+	}	
+	
 	public long getUserId() {
 		return _userId;
 	}
 
 	public void setUserId(int userId) {
 		_userId = userId;
+	}
+
+	public List<CountryModel> getCountries() {
+		return _countries;
 	}
 }

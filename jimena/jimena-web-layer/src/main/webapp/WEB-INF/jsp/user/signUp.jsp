@@ -15,6 +15,8 @@
 		<s:textfield name="userEmail" label="%{getText('userEmail')}" />
 		<s:password cssClass="pass"  name="userPassword" label="%{getText('userPassword')}"/>
 		<s:password name="userConfirmPass" label="%{getText('userConfirmPass')}"/>
+			
+		<s:combobox list="countries" id="userCountryCmb" name="userCountryId" label="Pais" />	
 		
 		<s:submit value="%{getText('ok')}" />
 	</s:form>
