@@ -10,27 +10,27 @@ $(document).ready(function() {
 	var userEmail = $('[name=userEmail]'); // $('.pass') getElementsByClass
 	userEmail.val('user email here');
 
-	var countriesPromise = $.get('/jimena-web-layer/json/countries');	
-	countriesPromise.done(function(response) {
-		fillUpCombWithSelector(
-				response.countries, 
-				'#userCountryCmb ~ select'
-		);		
-	}).fail(function() {
-		console.log('ocurrio un error :(');
-	});	
+	var countriesPromise = $.get('/jimena-web-layer/json/countries');
+	processPromise(countriesPromise, '#userCountryCmb ~ select');
 	
 	$('#userCountryCmb ~ select').change(function() {
-		var citiesPromise = $.get('/jimena-web-layer/json/cities', 
-				{countryId: $('#userCountryCmb').val()});
-		
-		citiesPromise.done(function(response) {	
+		var citiesPromise = $.get(
+				'/jimena-web-layer/json/cities', 
+				{countryId: $('#userCountryCmb').val()}
+		);		
+		processPromise(citiesPromise, '#userCityCmb ~ select');
+	});
+	
+	function processPromise(promise, selector){
+		promise.done(function(response) {	
 			fillUpCombWithSelector(
 					response.countries, 
-					'#userCityCmb ~ select'
+					selector
 			);
+		}).fail(function() {
+			console.log('ocurrio un error :(');
 		});
-	});
+	}
 	
 	function fillUpCombWithSelector(items, selector){
 		var options = items.map(function(country) {
