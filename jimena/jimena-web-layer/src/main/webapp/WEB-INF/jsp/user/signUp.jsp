@@ -18,6 +18,8 @@
 			
 		<s:combobox list="countries" id="userCountryCmb" name="userCountryId" label="Pais" />	
 		
+		<s:combobox list="countries" id="userCityCmb" name="userCityId" label="Ciudad" />
+		
 		<s:submit value="%{getText('ok')}" />
 	</s:form>
 	

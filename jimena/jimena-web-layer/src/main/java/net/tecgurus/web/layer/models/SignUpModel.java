@@ -10,6 +10,7 @@ public class SignUpModel implements Serializable {
 	private String userPassword;
 	private String userConfirmPass;
 	private int userCountryId;
+	private int userCityId;
 
 	public String getUserEmail() {
 		return userEmail;
@@ -49,5 +50,13 @@ public class SignUpModel implements Serializable {
 
 	public void setUserCountryId(int userCountryId) {
 		this.userCountryId = userCountryId;
+	}
+
+	public int getUserCityId() {
+		return userCityId;
+	}
+
+	public void setUserCityId(int userCityId) {
+		this.userCityId = userCityId;
 	}
 }

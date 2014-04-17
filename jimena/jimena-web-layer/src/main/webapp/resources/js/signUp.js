@@ -20,9 +20,20 @@ $(document).ready(function() {
 		
 		$('#userCountryCmb ~ select').html(options);
 		
+		$('#userCountryCmb ~ select').change(function() {
+			$.get('/jimena-web-layer/json/cities', {countryId: $('#userCountryCmb').val()}, function(response) {
+						var options = response.countries.map(function(country) {
+							return '<option value="%id">%val</option>'
+							.replace('%id', country.countryId)
+							.replace('%val', country.countryName);
+						});
+						
+						$('#userCityCmb ~ select').html(options);
+				});
+		});
 	}).fail(function() {
 		console.log('ocurrio un error :(');
-	});
+	});	
 
 });
 
