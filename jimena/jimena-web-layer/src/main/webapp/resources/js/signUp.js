@@ -10,30 +10,37 @@ $(document).ready(function() {
 	var userEmail = $('[name=userEmail]'); // $('.pass') getElementsByClass
 	userEmail.val('user email here');
 
-	$.get('/jimena-web-layer/json/countries')
-	.done(function(response) {
-		var options = response.countries.map(function(country) {
+	var countriesPromise = $.get('/jimena-web-layer/json/countries');	
+	countriesPromise.done(function(response) {
+		fillUpCombWithSelector(
+				response.countries, 
+				'#userCountryCmb ~ select'
+		);		
+	}).fail(function() {
+		console.log('ocurrio un error :(');
+	});	
+	
+	$('#userCountryCmb ~ select').change(function() {
+		var citiesPromise = $.get('/jimena-web-layer/json/cities', 
+				{countryId: $('#userCountryCmb').val()});
+		
+		citiesPromise.done(function(response) {	
+			fillUpCombWithSelector(
+					response.countries, 
+					'#userCityCmb ~ select'
+			);
+		});
+	});
+	
+	function fillUpCombWithSelector(items, selector){
+		var options = items.map(function(country) {
 			return '<option value="%id">%val</option>'
 			.replace('%id', country.countryId)
 			.replace('%val', country.countryName);
 		});
 		
-		$('#userCountryCmb ~ select').html(options);
-		
-		$('#userCountryCmb ~ select').change(function() {
-			$.get('/jimena-web-layer/json/cities', {countryId: $('#userCountryCmb').val()}, function(response) {
-						var options = response.countries.map(function(country) {
-							return '<option value="%id">%val</option>'
-							.replace('%id', country.countryId)
-							.replace('%val', country.countryName);
-						});
-						
-						$('#userCityCmb ~ select').html(options);
-				});
-		});
-	}).fail(function() {
-		console.log('ocurrio un error :(');
-	});	
+		$(selector).html(options);
+	}
 
 });
 
